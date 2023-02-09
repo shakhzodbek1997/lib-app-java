@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -7,6 +8,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         BookServiceInterface service = new ImplementServices();
+
+        Library library = new Library();
 
 
         do{
@@ -17,7 +20,9 @@ public class Main {
                     "3. Show Available Books\n" +
                     "4. Borrow Book\n" +
                     "5. Return Book\n" +
-                    "6. Exit\n"
+                    "6. Exit\n" +
+                    "7. Add new member\n" +
+                    "8. Get all members\n"
             );
 
             System.out.println("Enter Your Choice! "); // Getting choice from user
@@ -34,7 +39,9 @@ public class Main {
                     service.showAllAvailableBooks();
                     break;
                 case 4:
-                    service.borrowBook();
+                    System.out.println("Enter the book ID: ");
+                    long id = scanner.nextLong();
+                    library.borrowBook(id);
                     break;
                 case 5:
                     service.returnBook();
@@ -42,6 +49,12 @@ public class Main {
                 case 6:
                     System.out.println("Thank you For Using this Application!!!");
                     System.exit(0);
+                    break;
+                case 7:
+                   library.registerMember();
+                   break;
+                case 8:
+                    library.getAllMembers();
                     break;
                 default:
                     System.out.println("Please Enter Valid Choice!!!");

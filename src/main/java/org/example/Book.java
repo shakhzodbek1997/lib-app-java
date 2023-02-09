@@ -2,7 +2,7 @@ package org.example;
 
 public class Book {
     // Book details
-    private String id;
+    private long id;
     private String title;
     private String author;
     private String published_Year;
@@ -14,7 +14,7 @@ public class Book {
     }
 
     // parameter based constructor
-    public Book(String id, String title, String author, String published_Year, String status){
+    public Book(long id, String title, String author, String published_Year, String status){
         this.id = id;
         this.title = title;
         this.author = author;
@@ -23,11 +23,8 @@ public class Book {
     }
 
     // getter and setters for each field
-    public String getId(){
+    public long getId(){
         return id;
-    }
-    public void setId(String id){
-        this.id = id;
     }
 
     public String getTitle(){

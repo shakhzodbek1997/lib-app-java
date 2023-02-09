@@ -14,7 +14,7 @@ public class ImplementServices implements BookServiceInterface{
 
     @Override
     public void addBook() {// the logic of adding book
-        String book_id = validator.validateId();
+        long book_id = Long.parseLong(validator.validateId());
         String Author = validator.validateAuthorTitle("Author");
         String Title = validator.validateAuthorTitle("Title");
         String year = validator.validatePublishYear();
