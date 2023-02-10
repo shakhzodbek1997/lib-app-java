@@ -45,12 +45,14 @@ public class Library implements BookServiceInterface {
 
     @Override
     public void addBook() {
+        System.out.println("Enter the book title: ");
         String title = sc.nextLine();
+        System.out.println("Enter the book author: ");
         String author = sc.nextLine();
+        System.out.println("Enter the published year (ex: year-month-day): ");
         String publishedYear = sc.nextLine();
-        String status = sc.nextLine();
 
-        Book book = new Book(this.bookID++, title, author, publishedYear, status);
+        Book book = new Book(this.bookID++, title, author, publishedYear, "AVAILABLE");
 
         this.booksDB.add(book);
 
@@ -60,8 +62,7 @@ public class Library implements BookServiceInterface {
     @Override
     public void showAllBooks() {
         for (Book book: this.booksDB) {
-            book.toString();
-            System.out.println();
+            System.out.println(book.toString());
         }
     }
 
@@ -79,19 +80,44 @@ public class Library implements BookServiceInterface {
 
         System.out.println("Total available books: " + allAvailableBooks.size() + "\n");
         for (Book book: allAvailableBooks) {
-            book.toString();
-            System.out.println();
+            System.out.println(book.toString());
         }
 
     }
 
     @Override
-    public void borrowBook() {
+    public void borrowBook(String title) {
+        
+        boolean found = false;
+        for(Book book: booksDB) {
+            if (book.getTitle().equals(title)) {
+                if (book.getStatus() == "AVAILABLE") {
+                    book.setStatus("BORROWED");
+                    found = true;
+                    break;
+                }
+            }
+        }
 
+        if (!found) {
+            System.out.println("This book is not available");
+        } else {
+            System.out.println("Book " + title + " has been borrowed.");
+        }
     }
 
     @Override
-    public void returnBook() {
+    public void returnBook(String title) {
 
+        for (Book book: booksDB) {
+            if (book.getTitle().equals(title)) {
+                if (book.getStatus() == "BORROWED") {
+                    book.setStatus("AVAILABLE");
+                    break;
+                }
+            }
+        }
+
+        System.out.println("Book " + title + " has been returned.\nBook " + title + " is now available.");
     }
 }
