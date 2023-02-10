@@ -1,13 +1,11 @@
 package org.example;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        BookServiceInterface service = new ImplementServices();
 
         Library library = new Library();
 
@@ -27,24 +25,27 @@ public class Main {
 
             System.out.println("Enter Your Choice! "); // Getting choice from user
             int choice = scanner.nextInt();
-
             switch (choice){
                 case 1:
-                    service.addBook();
+                    library.addBook();
                     break;
                 case 2:
-                    service.showAllBooks();
+                    library.showAllBooks();
                     break;
                 case 3:
-                    service.showAllAvailableBooks();
+                    library.showAllAvailableBooks();
                     break;
                 case 4:
-                    System.out.println("Enter the book ID: ");
-                    long id = scanner.nextLong();
-                    library.borrowBook(id);
+                    System.out.print("Enter the book title: ");
+                    scanner.nextLine();
+                    String title = scanner.nextLine();
+                    library.borrowBook(title);
                     break;
                 case 5:
-                    service.returnBook();
+                    System.out.print("Enter the book title: ");
+                    scanner.nextLine();
+                    String currTitle = scanner.nextLine();
+                    library.returnBook(currTitle);
                     break;
                 case 6:
                     System.out.println("Thank you For Using this Application!!!");
@@ -61,5 +62,6 @@ public class Main {
             }
         }
         while (true);
+
     }
 }
